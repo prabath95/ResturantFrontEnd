@@ -1,0 +1,32 @@
+<div class="main-container">
+    <div class="content-container">
+        <div class="content-area">
+            <router-outlet></router-outlet>
+        </div>
+        <clr-vertical-nav>
+            <a clrVerticalNavLink routerLink="./home" routerLinkActive="active"><clr-icon clrVerticalNavIcon shape="home"></clr-icon>
+                Home
+            </a>
+            <a clrVerticalNavLink routerLink="./about" routerLinkActive="active"><clr-icon clrVerticalNavIcon shape="users"></clr-icon>
+                About
+            </a>
+            <clr-vertical-nav-group
+                routerLinkActive="active">
+                <a routerLink="./normal" hidden aria-hidden="true"></a>
+                <clr-icon shape="bars" clrVerticalNavIcon></clr-icon>
+                     Menue
+                <clr-vertical-nav-group-children *clrIfExpanded="true">
+                    <a clrVerticalNavLink routerLink="./menu/breakfast" routerLinkActive="active">Breakfast</a>
+                    <a clrVerticalNavLink routerLink="./menu/lunch" routerLinkActive="active">Lunch</a>
+                    <a clrVerticalNavLink routerLink="./menu/dinner" routerLinkActive="active">Dinner</a>
+                </clr-vertical-nav-group-children>
+             </clr-vertical-nav-group>
+            <a clrVerticalNavLink routerLink="./booktable" routerLinkActive="active"><clr-icon clrVerticalNavIcon shape="bookmark"></clr-icon>
+                Book a table
+            </a>
+            <a clrVerticalNavLink routerLink="./contactus" routerLinkActive="active"><clr-icon clrVerticalNavIcon shape="phone-handset"></clr-icon>
+                Contact us
+            </a>
+        </clr-vertical-nav>
+    </div>
+</div>
