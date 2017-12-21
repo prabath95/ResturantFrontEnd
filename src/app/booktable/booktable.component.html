@@ -1,75 +1,86 @@
-<form class="form" [formGroup]="reserveForm" (ngSubmit)="ngOnInit()">
+<form class="form" [formGroup]="reserveForm" (ngSubmit)="proceedPayment()" [hidden]="submitted">
     <section class="form-block">
         <label>Reserve Table</label>
         <div class="form-group">
-            <label for="formFields_1">User Name</label>
-            <input type="text" id="formFields_1" placeholder="User Name" size="35" disabled>
+            <div class=" imageposition">
+                <img src="./assets/TableView.png" alt="Tables In A Resturant">
+            </div>
         </div>
         <div class="form-group">
-            <label for="formFields_2">Email</label>
-            <label for="Email" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('Email').invalid
-            && (reserveForm.get('Email').dirty || reserveForm.get('Email').touched)">
-            <input type="text" id="formFields_2" placeholder="Email" formControlName="Email" size="35">
-            <span class="tooltip-content">
-                Invalid Email Format use eg:example@eg.com.
-            </span>
-            </label>
+            <label for="formFields_1">User Name</label>
+            <input type="text" class="thicker" placeholder="User Name" [formControl]="reserveForm.controls['username']" size="35" disabled>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['Email'].valid}">
+                <input type="text" id="Email" placeholder="Email" [formControl]="reserveForm.controls['Email']" size="35">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['Email'].hasError('required') && reserveForm.controls['Email'].touched">Email cannot be empty</div>
+                <div *ngIf="reserveForm.controls['Email'].hasError('pattern') && reserveForm.controls['Email'].touched" class="alert alert-danger">Please enter the correct email, this email not valid.</div>
+            </div>
         </div>
         <div class="form-group">
             <label for="formFields_3">Name</label>
-            <label for="name" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('name').invalid
-            && (reserveForm.get('name').dirty || reserveForm.get('name').touched)">
-              <input type="text" id="formFields_1" placeholder="Name" formControlName="name" size="35">
-              <span class="tooltip-content">
-                  Name cannot be empty.
-              </span>
-            </label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['name'].valid}">
+                <input type="text" id="formFields_1" placeholder="Name" [formControl]="reserveForm.controls['name']" size="35">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['name'].hasError('required') && reserveForm.controls['name'].touched">
+                    Name cannot be empty.
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="formFields_4">Contact Number</label>
-            <label for="phone" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('phone').invalid
-            && (reserveForm.get('phone').dirty || reserveForm.get('phone').touched)">
-              <input type="text" id="formFields_1" placeholder="Contact Number" formControlName="phone"  size="35">
-              <span class="tooltip-content">
-                  Contact number should be between 10 Digits.
-              </span>
-            </label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['phone'].valid}">
+                <input type="text" id="formFields_1" placeholder="Contact Number" [formControl]="reserveForm.controls['phone']" size="35">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['phone'].hasError('pattern') && reserveForm.controls['phone'].touched">
+                    Contact number should be between 10 Digits.
+                </div>
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['phone'].hasError('required') && reserveForm.controls['phone'].touched">
+                    Contact number cannot be empty.
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="formFields_11">Date</label>
-            <label for="phone" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('dateBook').invalid
-            && (reserveForm.get('dateBook').dirty || reserveForm.get('dateBook').touched)">
-            <input type="date" id="formFields_11" formControlName="dateBook" size="45">
-            <span class="tooltip-content">
-                Date should not be previous Date
-            </span>
-          </label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['dateBook'].valid}">
+                <input type="date" minDate=0 id="formFields_11" [formControl]="reserveForm.controls['dateBook']" size="45">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['dateBook'].hasError('required') && reserveForm.controls['dateBook'].touched">
+                    Date should not be previous Date
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="formFields_11">Start Time</label>
-            <label for="startTime" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('startTime').invalid
-            && (reserveForm.get('startTime').dirty || reserveForm.get('startTime').touched)">
-            <input type="datetime-local" id="formFields_12" formControlName="startTime" size="35">
-            <span class="tooltip-content">
-                Time should be between 10:00 to 20:00 
-            </span>
-          </label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['startTime'].valid}">
+                <input type="time" id="formFields_12" [formControl]="reserveForm.controls['startTime']" size="35">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['startTime'].hasError('required') && reserveForm.controls['startTime'].touched">
+                    Time should be between 10:00 to 20:00
+                </div>
+            </div>
         </div>
         <div class="form-group">
             <label for="formFields_12">End Time</label>
-            <label for="endTime" aria-haspopup="true" role="tooltip" class="tooltip tooltip-validation invalid tooltip-md"[class.invalid]="reserveForm.get('endTime').invalid
-            && (reserveForm.get('endTime').dirty || reserveForm.get('endTime').touched)">
-            <input type="time" id="formFields_12" formControlName="endTime" size="35">
-            <span class="tooltip-content">
-                Time should be between 10:00 to 20:00 and greater than start time 
-            </span>
-          </label>
+            <div [ngClass]="{'has-error':!reserveForm.controls['endTime'].valid}">
+                <input type="time" id="formFields_13" [formControl]="reserveForm.controls['endTime']" size="35">
+                <div class="alert alert-danger" *ngIf="reserveForm.controls['endTime'].hasError('required') && reserveForm.controls['endTime'].touched">
+                    Time should be between 10:00 to 20:00 and greater than start time
+                </div>
+            </div>
         </div>
         <div class="form-group">
-            <label for="formFields_8">Comments</label>
-            <textarea id="formFields_8" rows="5" formControlName="comments"></textarea>
+            <label for="formFields_13">Select Table</label>
+            <select class="dropbtn" [formControl]="reserveForm.controls['table']"  (ngModelChange)="calculatePrice($event)">
+                <option *ngFor="let tbl of tables" [ngValue]=tbl>{{tbl.ID}}</option>
+            </select>
         </div>
-        <button class="btn btn-primary">Reserve</button>
+        <div class="form-group">
+            <label for="formFields_1">Price</label>
+            <input class="thicker" type="text" placeholder="Price" formControlName="price" size="35" disabled>
+        </div>
+        <div class="form-group">
+            <label for="formFields_8">Description</label>
+            <textarea id="formFields_8" rows="5" [formControl]="reserveForm.controls['comments']"></textarea>
+        </div>
+        <button class="btn btn-primary" [disabled]="reserveForm.invalid">Reserve</button>
     </section>
 </form>
 
@@ -79,7 +90,62 @@
         <p>{{description}}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="onsubmit()">Ok</button>
+        <button type="button" class="btn btn-outline" (click)="homePage()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="LoginPage()">Ok</button>
+    </div>
+</clr-modal>
+<clr-modal [(clrModalOpen)]="paymentVerification">
+    <h3 class="modal-title">Payment Details</h3>
+    <div class="modal-body">
+        <div class="panel-heading display-table">
+            <div class="row display-tr">
+                <div class="display-td">
+                    <img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="cardNumber">CARD NUMBER</label>
+                            <div class="input-group">
+                                <input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number" required
+                                    autofocus />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-7 col-md-7">
+                        <div class="form-group">
+                            <label for="cardExpiry">
+                                <span class="hidden-xs">EXPIRATION</span>
+                                <span class="visible-xs-inline">EXP</span> DATE</label>
+                            <input type="tel" class="form-control" name="cardExpiry" placeholder="MM / YY" autocomplete="cc-exp" required />
+                        </div>
+                    </div>
+                    <div class="col-xs-9 col-md-9">
+                        <div class="form-group">
+                            <label for="cardCVC">CV CODE</label>
+                            <input type="tel" class="form-control" name="cardCVC" placeholder="CVC" autocomplete="cc-csc" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <label for="couponCode">COUPON CODE</label>
+                            <input type="text" class="form-control" name="couponCode" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="paymentVerification = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="addBooking()">Confirm Payment</button>
     </div>
 </clr-modal>

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ClarityModule } from "clarity-angular";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -17,6 +18,11 @@ import { BooktableComponent } from './booktable/booktable.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { LoginmodalComponent } from './shared/loginmodal/loginmodal.component';
 import { LoginComponent } from './login/login.component';
+
+import { LoginServiceService } from "./services/login/login-service.service";
+import { BookingserviceService } from "./services/booking/bookingservice.service";
+import { DessertsComponent } from './menu/desserts/desserts.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   {
@@ -48,8 +54,16 @@ const appRoutes: Routes = [
     component : DinnerComponent,
   },
   {
+    path: 'menu/dessert', 
+    component : DessertsComponent,
+  },
+  {
     path: 'booktable',
     component : BooktableComponent,
+  },
+  {
+    path: 'signup',
+    component : SignUpComponent,
   },
   {
     path: 'contactus',
@@ -74,7 +88,9 @@ const appRoutes: Routes = [
     BooktableComponent,
     ContactusComponent,
     LoginmodalComponent,
-    LoginComponent
+    LoginComponent,
+    DessertsComponent,
+    SignUpComponent,
   ],
   imports: [
     ClarityModule.forRoot(),
@@ -84,9 +100,13 @@ const appRoutes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
-  providers: [],
+  providers: [
+    LoginServiceService,
+    BookingserviceService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,31 @@
-<div class="container">
-    <form class="form-signin">
-        <h2 class="form-signin-heading">Sign In</h2>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" size="33" required autofocus>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" size="33" required>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+<div class="login-wrapper">
+    <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+        <label class="title">
+            Delicious Table Booking System
+            <h5 class="hint">Use your Email and password to sign in</h5>
+        </label>
+        <div>
+            <div class="login-group" [ngClass]="{'has-error':!loginForm.controls['username'].valid}">
+                <input type="text" id="login_username" placeholder="contact number" [formControl]="loginForm.controls['username']">
+                <div class="alert alert-danger" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Email cannot be empty</div>
+                <div *ngIf="loginForm.controls['username'].hasError('pattern') && loginForm.controls['username'].touched" class="alert alert-danger">Please enter the correct email, this email not valid.</div>
+            </div>
+            <div class="login-group" [ngClass]="{'has-error':!loginForm.controls['password'].valid}">
+                <input type="password" [formControl]="loginForm.controls['password']" placeholder="Password">
+                <div class="alert alert-danger" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password cannot be empty</div>
+            </div>
+            <div class="checkbox">
+                <input type="checkbox" id="rememberme">
+                <label for="rememberme">
+                    Remember me
+                </label>
+            </div>
+            <div *ngIf="invalidCredentials" class="alert alert-danger">
+                {{error}}
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
+            
+        </div>
+        <a (click)="signup()" class="signup">Sign up for a Company</a>
     </form>
 </div>

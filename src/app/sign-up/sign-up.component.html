@@ -1,0 +1,58 @@
+<form class="form" [formGroup]="singUpForm" (ngSubmit)="signUp()" [hidden]="submitted">
+  <section class="form-block">
+    <label>Sign UP</label>
+    <div class="form-group">
+      <label for="Email">Email</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['Email'].valid}">
+        <input type="text"  placeholder="Email" [formControl]="singUpForm.controls['Email']" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['Email'].hasError('required') && singUpForm.controls['Email'].touched">Email cannot be empty</div>
+        <div *ngIf="singUpForm.controls['Email'].hasError('pattern') && singUpForm.controls['Email'].touched" class="alert alert-danger">Please enter the correct email, this email not valid.</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formFields_3">First Name</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['fname'].valid}">
+        <input type="text"  placeholder="First Name" [formControl]="singUpForm.controls['fname']" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['fname'].hasError('required') && singUpForm.controls['fname'].touched">
+          Name cannot be empty.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formFields_3">Last Name</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['lname'].valid}">
+        <input type="text"  placeholder="Last Name" [formControl]="singUpForm.controls['lname']" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['lname'].hasError('required') && singUpForm.controls['lname'].touched">
+          Name cannot be empty.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formFields_4">Contact Number</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['phone'].valid}">
+        <input type="text"  placeholder="Contact Number" [formControl]="singUpForm.controls['phone']" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['phone'].hasError('pattern') && singUpForm.controls['phone'].touched">
+          Contact number should be between 10 Digits.
+        </div>
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['phone'].hasError('required') && singUpForm.controls['phone'].touched">
+          Contact number cannot be empty.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formFields_4">Password</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['password'].valid}">
+        <input type="password" [formControl]="singUpForm.controls['password']" placeholder="Password" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['password'].hasError('required') && singUpForm.controls['password'].touched">Password cannot be empty</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="formFields_4">Confirm Password</label>
+      <div [ngClass]="{'has-error':!singUpForm.controls['cpassword'].valid}">
+        <input type="password" [formControl]="singUpForm.controls['cpassword']" placeholder="Confirm Password" size="35">
+        <div class="alert alert-danger" *ngIf="singUpForm.controls['cpassword'].hasError('required') && singUpForm.controls['cpassword'].touched">Password cannot be empty</div>
+      </div>
+    </div>
+    <button class="btn btn-primary" [disabled]="singUpForm.invalid">Sing Up</button>
+  </section>
+</form>
